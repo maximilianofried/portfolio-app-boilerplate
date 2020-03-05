@@ -7,10 +7,19 @@ import { FormGroup, Label, Button } from 'reactstrap';
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 export default class PortDate extends React.Component {
-  state = {
-    dateValue: moment(),
-    isHidden: false
-  };
+
+  constructor(props) {
+    super(props);
+
+    const dateValue = props.initialDate ? moment(props.initialDate) : moment();
+    const isHidden = props.initialDate ? false : true;
+
+    this.state = {
+      dateValue,
+      isHidden
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
 
   setFieldValueAndTouched(date, touched) {
     const { setFieldValue, setFieldTouched } = this.props.form;
@@ -19,6 +28,7 @@ export default class PortDate extends React.Component {
     setFieldValue(name, date, true);
     setFieldTouched(name, touched, true);
   }
+
   handleChange = date => {
     this.setState({
         dateValue: date

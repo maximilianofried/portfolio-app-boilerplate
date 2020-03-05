@@ -1,6 +1,6 @@
 import React from 'react';
 import BaseLayout from '../components/layouts/BaseLayout';
-import { withRouter } from 'next/router';
+import { withRouter, Router } from 'next/router';
 import axios from 'axios';
 import BasePage from '../components/BasePage';
 
@@ -15,7 +15,6 @@ class Portfolio extends React.Component {
         } catch(err) {
             console.log(err);
         }
-        debugger
         return {portfolio};
     }
 

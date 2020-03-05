@@ -1,18 +1,19 @@
-const express = require('express');
-const next = require('next');
-const mongoose = require('mongoose');
-const routes = require('../routes');
-const dev = process.env.NODE_ENV !== 'production';
-const app = next({dev});
-const handle = routes.getRequestHandler(app);
-const config = require('./config');
+const express           = require('express');
+const next              = require('next');
+const mongoose          = require('mongoose');
+const routes            = require('../routes');
+const dev               = process.env.NODE_ENV !== 'production';
+const app               = next({dev});
+const handle            = routes.getRequestHandler(app);
+const config            = require('./config');
 
-const Book = require('./models/book');
-const bodyParser = require('body-parser');
+const Book              = require('./models/book');
+const bodyParser        = require('body-parser');
 //SERVICES
-const authService = require('./services/auth');
-
-const secretData = [
+const authService       = require('./services/auth');
+const bookRoutes        = require('./routes/book');
+const PortfolioRoutes   = require('./routes/portfolios');
+const secretData        = [
     {
         title: 'secret data 1',
         description: 'lets kill donald trump'
@@ -32,34 +33,69 @@ app.prepare()
     const server = express();
 
     server.use(bodyParser.json());
+    server.use('/api/v1/books', bookRoutes);
+    server.use('/api/v1/portfolios', PortfolioRoutes);
+    // server.post('/api/v1/books', (req, res) => {
+    //     const bookData = req.body;
+    //     const book = new Book(bookData);
+    //     book.save((err, createdBook) =>{
+    //         if(err) {
+    //             return res.status(422).send(err);
+    //         }
+    //         return res.json(createdBook);
+    //     })
+    // });
 
-    server.post('/api/v1/books', (req, res) => {
-        const bookData = req.body;
+    // server.get('/api/v1/books', (req, res) => {
+    //     Book.find({}, (err, allBooks) => {   //empty object to get all books.
+    //         if(err) {
+    //             return res.status(422).send(err);
+    //         }
+    //         return res.json(allBooks);
+    //     })
+    // });
 
-        const book = new Book(bookData);
+    // server.patch('/api/v1/books/:id', (req, res) => {
+    //     const bookId = req.params.id;
+    //     const bookData = req.body;
 
-        book.save((err, createdBook) =>{
-            if(err) {
-                return res.status(422).send(err);
-            }
-            return res.json(createdBook);
-        })
-    })
+    //     Book.findById(bookId, (err, foundBook) => {
+    //         if(err) {
+    //             return res.status(422).send(err);
+    //         }
 
+    //         foundBook.set(bookData);
+    //         foundBook.save((err, savedBook) => {
+    //             if(err) {
+    //                 return res.status(422).send(err);
+    //             }
 
+    //             return res.json(foundBook);
+    //         })
+    //     })
+    // });
 
+    // server.delete('/api/v1/books/:id', (req, res) => {
+    //     const bookId = req.params.id;
+    //     Book.deleteOne({_id: bookId}, (err, deletedBook) => {
+    //         if(err) {
+    //             return res.status(422).send(err);
+    //         }
 
+    //         return res.json({status: 'DELETED'});
+    //     })
+    // });
 
 
 
 
     server.get('/api/v1/secret', authService.checkJWT, (req, res) => {
          return res.json(secretData);
-    })
+    });
 
     server.get('/api/v1/onlysiteowner', authService.checkJWT, authService.checkRole('siteOwner'), (req, res) => {
         return res.json(secretData);
-   })
+   });
 
     server.get('*', (req, res) => {
         return handle(req, res);
