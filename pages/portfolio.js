@@ -19,7 +19,6 @@ class Portfolio extends React.Component {
     }
 
     render() {
-        debugger
         const {portfolio} = this.props;
         return (
             <BaseLayout {...this.props.auth}>

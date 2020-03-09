@@ -15,18 +15,16 @@ class Portfolio extends React.Component {
         } catch(err) {
             console.log(err);
         }
-        debugger
         return {portfolio};
     }
 
     render() {
-        debugger
         const {portfolio} = this.props;
         return (
             <BaseLayout>
                 <BasePage>
-                    <h1>{portfolio.title}</h1>   
-                    <h2>BODY: {portfolio.body}</h2> 
+                    <h1>{portfolio.title}</h1>
+                    <h2>BODY: {portfolio.body}</h2>
                     <p>ID:  {portfolio.id}</p>
                 </BasePage>
             </BaseLayout>
