@@ -12,7 +12,8 @@ const bodyParser        = require('body-parser');
 //SERVICES
 const authService       = require('./services/auth');
 const bookRoutes        = require('./routes/book');
-const PortfolioRoutes   = require('./routes/portfolios');
+const portfolioRoutes   = require('./routes/portfolios');
+const blogRoutes        = require('./routes/blog');
 const secretData        = [
     {
         title: 'secret data 1',
@@ -34,7 +35,8 @@ app.prepare()
 
     server.use(bodyParser.json());
     server.use('/api/v1/books', bookRoutes);
-    server.use('/api/v1/portfolios', PortfolioRoutes);
+    server.use('/api/v1/portfolios', portfolioRoutes);
+    server.use('/api/v1/blogs', blogRoutes);
     // server.post('/api/v1/books', (req, res) => {
     //     const bookData = req.body;
     //     const book = new Book(bookData);
