@@ -105,7 +105,7 @@ export default class Header extends React.Component {
         return (
             <div>
             <Navbar className={`port-navbar port-nav-base absolute ${className} ${menuOpenClass}`} color="transparent" dark expand="md">
-                <NavbarBrand className="port-navbar-brand" href="/">Fuck You!</NavbarBrand>
+                <NavbarBrand className="port-navbar-brand" href="/">Lorem ipsum!</NavbarBrand>
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>

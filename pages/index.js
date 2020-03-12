@@ -11,7 +11,7 @@ class Index extends React.Component {
             isFlipping: false
         }
 
-        this.roles = ['Drug Addict', 'Hacker', 'Activist', 'Pornstar'];
+        this.roles = ['Foo', 'Fooooo', 'Faa', 'Faaaaa'];
     }
 
     animateCard() {
@@ -34,7 +34,9 @@ class Index extends React.Component {
         const {isAuthenticated, user} = this.props.auth;
         const {isFlipping} = this.state;
         return (
-            <BaseLayout className={`cover ${isFlipping ? 'cover-1' : 'cover-0'}`} {...this.props.auth}  headerType="index">
+            <BaseLayout className={`cover ${isFlipping ? 'cover-1' : 'cover-0'}`} {...this.props.auth}
+                        headerType="index"
+                        title="Maximiliano Fried - Webpage">
             <div className="main-section">
                 <div className="background-image">
                 <img src="/static/images/background-index.png" />
@@ -46,24 +48,24 @@ class Index extends React.Component {
                         <div className={`flipper ${isFlipping ? 'isFlipping' : ''}`}>
                         <div className="front">
                             <div className="hero-section-content">
-                            <h2> Violador serial borracho y machista </h2>
+                            <h2> Lorem ipsum dolor sit amet, consectetur adipiscing elit </h2>
                             <div className="hero-section-content-intro">
-                                Have a look at my portfolio and job history.
+                                Curabitur tristique mollis lacus.
                             </div>
                             </div>
-                            <img className="image" src="/static/images/section-1.png"/>
+                            <img alt="Guy programming welcome picture" className="image" src="/static/images/section-1.png"/>
                             <div className="shadow-custom">
                             <div className="shadow-inner"> </div>
                             </div>
                         </div>
                         <div className="back">
                             <div className="hero-section-content">
-                            <h2> Violador serial borracho y machista </h2>
+                            <h2> Lorem ipsum dolor sit amet, consectetur adipiscing elit </h2>
                             <div className="hero-section-content-intro">
-                                Have a look at my portfolio and job history.
+                                Curabitur tristique mollis lacus.
                             </div>
                             </div>
-                            <img className="image" src="/static/images/section-2.png"/>
+                            <img alt="Guy programming welcome picture" className="image" src="/static/images/section-2.png"/>
                             <div className="shadow-custom shadow-custom-2">
                             <div className="shadow-inner"> </div>
                             </div>
@@ -75,8 +77,8 @@ class Index extends React.Component {
                     <div className="hero-welcome-text">
                         <h1>
                         {isAuthenticated && <span><b>{user.name} </b></span>}
-                        Welcome to the hell.
-                        Get informed, collaborate and discover many ways to die!
+                        Mauris posuere posuere purus id convallis.
+                        Donec mattis fringilla orci ac imperdiet.
                         </h1>
                         <Typed
                             loop
@@ -91,11 +93,11 @@ class Index extends React.Component {
                             className="self-typed"
                             />
                     </div>
-                    <div className="hero-welcome-bio">
-                        <h1>
+                    {/* <div className="hero-welcome-bio">
+                        <h2>
                         Let's take at the black spirits.
-                        </h1>
-                    </div>
+                        </h2>
+                    </div> */}
                     </Col>
                 </Row>
                 </Container>

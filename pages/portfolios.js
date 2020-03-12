@@ -1,6 +1,5 @@
 import React from 'react';
 import BaseLayout from '../components/layouts/BaseLayout';
-//import {Link} from '../routes';
 import BasePage from '../components/BasePage';
 import PortfolioCard from '../components/portfolios/PortfolioCard';
 import {Col, Row, Button} from 'reactstrap';
@@ -66,10 +65,10 @@ class Portfolio extends React.Component {
         const {isAuthenticated, isSiteOwner} = this.props.auth;
 
         return (
-            <BaseLayout {...this.props.auth}>
-                <BasePage className="portfolio-page" title="portfolio page">
+            <BaseLayout title="Maximiliano Fried - See My Portfolio" {...this.props.auth}>
+                <BasePage className="portfolio-page" title="Portfolio Page">
                     {   isAuthenticated && isSiteOwner &&
-                        <Button onClick={() => Router.pushRoute('/portfolioNew')}
+                        <Button onClick={() => Router.pushRoute('/portfolios/new')}
                                 color="success"
                                 className="create-port-btn">Create Portfolio
                         </Button>
