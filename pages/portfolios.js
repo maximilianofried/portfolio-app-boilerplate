@@ -11,7 +11,6 @@ class Portfolio extends React.Component {
         let portfolios = [];
         try {
             portfolios = await getPortfolios();
-            portfolios = response.data;
         } catch(err) {
             console.log(err);
         }

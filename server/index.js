@@ -8,7 +8,6 @@ const app               = next({dev});
 const handle            = routes.getRequestHandler(app);
 const config            = require('./config');
 
-const Book              = require('./models/book');
 const bodyParser        = require('body-parser');
 //SERVICES
 const authService       = require('./services/auth');
