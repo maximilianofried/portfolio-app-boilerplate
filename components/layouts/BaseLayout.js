@@ -3,7 +3,8 @@ import Header from '../shared/Header';
 import Head from 'next/head';
 
 const BaseLayout = (props) => {
-    const { className, children, isAuthenticated, user } = props;
+    const { className, children, isAuthenticated, user, isSiteOwner } = props;
+    const headerType = props.headerType || 'defualt';
     return (
         <React.Fragment>
             <Head>
@@ -12,7 +13,11 @@ const BaseLayout = (props) => {
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
             </Head>
             <div className="layout-contianer">
-                <Header isAuthenticated={isAuthenticated} user={user}/>
+                <Header
+                        isAuthenticated={isAuthenticated}
+                        user={user}
+                        isSiteOwner={isSiteOwner}
+                        className={`port-nav-${headerType}`}/>
                 <main className={`cover ${className}`}>
                     <div className="wrapper">
                         {children}

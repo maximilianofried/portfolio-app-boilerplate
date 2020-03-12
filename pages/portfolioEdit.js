@@ -16,7 +16,6 @@ class PortfolioEdit extends React.Component {
         } catch (error) {
             console.log(error);
         }
-        console.log("initialpROPS",portfolio);
         return {portfolio};
     }
 

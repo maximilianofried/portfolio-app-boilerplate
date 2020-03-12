@@ -6,12 +6,35 @@ import Typed from 'react-typed';
 class Index extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            isFlipping: false
+        }
+
         this.roles = ['Drug Addict', 'Hacker', 'Activist', 'Pornstar'];
     }
+
+    animateCard() {
+        this.cardAnimationInterval = setInterval(() => {
+            this.setState({
+                isFlipping: !this.state.isFlipping
+            });
+        }, 3000);
+    }
+
+    componentDidMount() {
+        this.animateCard();
+    }
+
+    componentWillUnmount() {
+        this.cardAnimationInterval && clearInterval(this.cardAnimationInterval);
+    }
+
     render() {
         const {isAuthenticated, user} = this.props.auth;
+        const {isFlipping} = this.state;
         return (
-            <BaseLayout {...this.props.auth} className="cover" headerType="index">
+            <BaseLayout className={`cover ${isFlipping ? 'cover-1' : 'cover-0'}`} {...this.props.auth}  headerType="index">
             <div className="main-section">
                 <div className="background-image">
                 <img src="/static/images/background-index.png" />
@@ -20,8 +43,8 @@ class Index extends React.Component {
                 <Row>
                     <Col md="6">
                     <div className="hero-section">
-                        <div className={`flipper`}>
-                        <div className="back">
+                        <div className={`flipper ${isFlipping ? 'isFlipping' : ''}`}>
+                        <div className="front">
                             <div className="hero-section-content">
                             <h2> Violador serial borracho y machista </h2>
                             <div className="hero-section-content-intro">
@@ -30,6 +53,18 @@ class Index extends React.Component {
                             </div>
                             <img className="image" src="/static/images/section-1.png"/>
                             <div className="shadow-custom">
+                            <div className="shadow-inner"> </div>
+                            </div>
+                        </div>
+                        <div className="back">
+                            <div className="hero-section-content">
+                            <h2> Violador serial borracho y machista </h2>
+                            <div className="hero-section-content-intro">
+                                Have a look at my portfolio and job history.
+                            </div>
+                            </div>
+                            <img className="image" src="/static/images/section-2.png"/>
+                            <div className="shadow-custom shadow-custom-2">
                             <div className="shadow-inner"> </div>
                             </div>
                         </div>
