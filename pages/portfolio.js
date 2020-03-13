@@ -1,8 +1,8 @@
 import React from 'react';
-import BaseLayout from '../../components/layouts/BaseLayout';
-import { withRouter } from 'next/router';
+import BaseLayout from '../components/layouts/BaseLayout';
+import { withRouter, Router } from 'next/router';
 import axios from 'axios';
-import BasePage from '../../components/BasePage';
+import BasePage from '../components/BasePage';
 
 class Portfolio extends React.Component {
 
@@ -21,9 +21,8 @@ class Portfolio extends React.Component {
     render() {
         const {portfolio} = this.props;
         return (
-            <BaseLayout>
+            <BaseLayout {...this.props.auth}>
                 <BasePage>
-                    <h1>{portfolio.title}</h1>
                     <h2>BODY: {portfolio.body}</h2>
                     <p>ID:  {portfolio.id}</p>
                 </BasePage>
