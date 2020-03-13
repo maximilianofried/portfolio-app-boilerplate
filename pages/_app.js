@@ -5,8 +5,6 @@ import auth0 from '../services/auth0';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/mains.scss';
 import 'react-toastify/dist/ReactToastify.css';
-
-const namespace = 'http://localhost:3000';
 function MyApp({ Component, pageProps, auth }) {
     return (
     <Container>
@@ -19,7 +17,7 @@ function MyApp({ Component, pageProps, auth }) {
   MyApp.getInitialProps = async (appContext) => {
      let appProps = await App.getInitialProps(appContext);
      const user = process.browser ? await auth0.clientAuth() : await  auth0.serverAuth(appContext.ctx.req);
-     const isSiteOwner = user && user[namespace + '/role'] === 'siteOwner';
+     const isSiteOwner = user && user[process.env.NAMESPACE + '/role'] === 'siteOwner';
      const auth = {user, isAuthenticated: !!user, isSiteOwner};
      return {...appProps, auth,};
    }

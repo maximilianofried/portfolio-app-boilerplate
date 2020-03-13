@@ -10,7 +10,6 @@ const config            = require('./config');
 
 const bodyParser        = require('body-parser');
 //SERVICES
-const authService       = require('./services/auth');
 const bookRoutes        = require('./routes/book');
 const portfolioRoutes   = require('./routes/portfolios');
 const blogRoutes        = require('./routes/blog');
@@ -21,16 +20,6 @@ const robotsOption      = {
         'Content-Type': 'text/plain;charset=UTF-8'
     }
 }
-const secretData        = [
-    {
-        title: 'secret data 1',
-        description: 'lets kill donald trump'
-    },
-    {
-        title: 'secret data 2',
-        description: 'psichedelycs are good'
-    }
-]
 
 mongoose.connect(config.DB_URI, { useUnifiedTopology: true, useNewUrlParser: true})
     .then(()=> console.log('Database Connected!'))
@@ -49,14 +38,6 @@ app.prepare()
         return res.status(200).sendFile('robots.txt', robotsOption);
     })
 
-    server.get('/api/v1/secret', authService.checkJWT, (req, res) => {
-         return res.json(secretData);
-    });
-
-    server.get('/api/v1/onlysiteowner', authService.checkJWT, authService.checkRole('siteOwner'), (req, res) => {
-        return res.json(secretData);
-   });
-
     server.get('*', (req, res) => {
         return handle(req, res);
     });
@@ -67,9 +48,11 @@ app.prepare()
         }
     });
 
-    server.use(handle).listen(3000, (err) => {
+    const port = process.env.PORT || 3000;
+
+    server.use(handle).listen(port, (err) => {
         if (err) throw err;
-        console.log('> Ready on http://localhost:3000');
+        console.log('> Ready on port ' + port );
     });
 })
 .catch((ex) => {

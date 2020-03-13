@@ -17,7 +17,7 @@ const BaseLayout = (props) => {
                 <meta property="og:type" content="website"/>
                 <meta property="og:description" content="My name is Fried Maximiliano and I am an experienced software engineer and freelance developer."/>
 
-                {cannonical && <Link rel="cannonical" href={`http://localhost:3000${cannonical}`}/>}
+                {cannonical && <Link rel="cannonical" href={`${process.env.BASE_URL}${cannonical}`}/>}
                 <link rel="icon" type="image/ico" href="/static/favicon.ico"/>
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" integrity="sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv" crossorigin="anonymous"/>
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
