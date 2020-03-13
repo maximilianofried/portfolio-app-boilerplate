@@ -28,7 +28,6 @@ mongoose.connect(config.DB_URI, { useUnifiedTopology: true, useNewUrlParser: tru
 app.prepare()
 .then(() => {
     const server = express();
-    server.use(compression());
     server.use(bodyParser.json());
     server.use('/api/v1/books', bookRoutes);
     server.use('/api/v1/portfolios', portfolioRoutes);
