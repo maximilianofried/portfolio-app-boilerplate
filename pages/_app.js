@@ -1,25 +1,39 @@
 import App, { Container } from 'next/app';
 import {ToastContainer} from 'react-toastify';
+import Fonts from '../helpers/Fonts';
 import auth0 from '../services/auth0';
 //Styling
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/mains.scss';
 import 'react-toastify/dist/ReactToastify.css';
-function MyApp({ Component, pageProps, auth }) {
-    return (
-    <Container>
-      <ToastContainer/>
-      <Component {...pageProps} auth={auth} />
-    </Container>
-    )
+export default class MyApp extends App {
+
+  static async getInitialProps({Component, router, ctx}) {
+    let pageProps = {};
+    const user = process.browser ? await auth0.clientAuth() : await auth0.serverAuth(ctx.req);
+
+    if(Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx);
+    }
+
+    const isSiteOwner = user && user[process.env.NAMESPACE + '/role'] === 'siteOwner';
+    const auth = {user, isAuthenticated: !!user, isSiteOwner};
+
+    return {pageProps, auth};
   }
 
-  MyApp.getInitialProps = async (appContext) => {
-     let appProps = await App.getInitialProps(appContext);
-     const user = process.browser ? await auth0.clientAuth() : await  auth0.serverAuth(appContext.ctx.req);
-     const isSiteOwner = user && user[process.env.NAMESPACE + '/role'] === 'siteOwner';
-     const auth = {user, isAuthenticated: !!user, isSiteOwner};
-     return {...appProps, auth,};
-   }
+  componentDidMount() {
+    Fonts();
+  }
 
-  export default MyApp;
+  render() {
+    const {Component, pageProps, auth} = this.props;
+
+    return (
+      <Container>
+        <ToastContainer/>
+          <Component {...pageProps} auth={auth}/>
+      </Container>
+    )
+  }
+}
