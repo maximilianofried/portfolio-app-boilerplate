@@ -11,7 +11,6 @@ const config            = require('./config');
 
 const bodyParser        = require('body-parser');
 //SERVICES
-const bookRoutes        = require('./routes/book');
 const portfolioRoutes   = require('./routes/portfolios');
 const blogRoutes        = require('./routes/blog');
 
@@ -31,7 +30,6 @@ app.prepare()
     const server = express();
     server.use(compression());
     server.use(bodyParser.json());
-    server.use('/api/v1/books', bookRoutes);
     server.use('/api/v1/portfolios', portfolioRoutes);
     server.use('/api/v1/blogs', blogRoutes);
 
